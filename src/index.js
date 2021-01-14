@@ -4,10 +4,22 @@ import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+import { combineReducers, createStore } from 'redux';
+import counterReducer from './store/reducers/counterReducer';
+import resultReducer from './store/reducers/resultReducer';
+import { Provider } from 'react-redux';
+
+const store = createStore(
+  combineReducers({
+    counterReducer: counterReducer,
+    resultReducer: resultReducer,
+  })
+);
+
 ReactDOM.render(
-  <React.StrictMode>
+  <Provider store={store}>
     <App />
-  </React.StrictMode>,
+  </Provider>,
   document.getElementById('root')
 );
 
