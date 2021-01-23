@@ -1,5 +1,4 @@
 import * as actionTypes from './actionTypes';
-
 // aciton creator are useful for asynchronous actions. You can use them for synchronous actions as well.
 
 const saveResult = (counter) => {
