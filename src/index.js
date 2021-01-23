@@ -7,6 +7,7 @@ import {
   compose /*for combining enhancers*/,
 } from 'redux';
 import { Provider } from 'react-redux';
+import thunk from 'redux-thunk';
 
 import './index.css';
 import App from './App';
@@ -18,10 +19,8 @@ const logger = (store) => {
   return (next) => {
     return (action) => {
       console.log('[Middleware] dispatching', action);
-      setTimeout(() => {
-        next(action);
-      }, 3000);
-      console.log('[Middleware] next state', store.getState());
+      next(action);
+      // console.log('[Middleware] next state', store.getState());
       // return result;
     };
   };
@@ -35,7 +34,7 @@ const store = createStore(
     counterReducer: counterReducer,
     resultReducer: resultReducer,
   }),
-  composeEnhancers(applyMiddleware(logger))
+  composeEnhancers(applyMiddleware(logger, thunk))
 );
 
 ReactDOM.render(

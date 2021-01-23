@@ -1,6 +1,4 @@
-import * as actionTypes from './types';
-
-// aciton creator are useful for asynchronous actions. You can use them for synchronous actions as well.
+import * as actionTypes from './actionTypes';
 
 export const increment = () => {
   return {
@@ -25,19 +23,5 @@ export const decrementBy5 = (payload) => {
   return {
     type: actionTypes.DECREMENTBY5,
     payload,
-  };
-};
-
-export const storeResult = (counter) => {
-  return {
-    type: actionTypes.STORE_RESULT,
-    payload: counter,
-  };
-};
-
-export const deleteResult = (id) => {
-  return {
-    type: actionTypes.DELETE_RESULT,
-    id: id,
   };
 };
