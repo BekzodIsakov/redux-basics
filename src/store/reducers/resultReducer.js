@@ -11,7 +11,7 @@ const resultReducer = (state = initialState, action) => {
         ...state,
         results: state.results.concat({
           id: new Date(),
-          value: action.counter,
+          value: action.payload,
         }),
       };
     case actionTypes.DELETE_RESULT:
@@ -20,8 +20,9 @@ const resultReducer = (state = initialState, action) => {
         ...state,
         results: newResult,
       };
+    default:
+      return state;
   }
-  return state;
 };
 
 export default resultReducer;

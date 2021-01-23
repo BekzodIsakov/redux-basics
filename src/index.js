@@ -1,19 +1,41 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {
+  combineReducers,
+  createStore,
+  applyMiddleware,
+  compose /*for combining enhancers*/,
+} from 'redux';
+import { Provider } from 'react-redux';
+
 import './index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
-
-import { combineReducers, createStore } from 'redux';
 import counterReducer from './store/reducers/counterReducer';
 import resultReducer from './store/reducers/resultReducer';
-import { Provider } from 'react-redux';
+
+const logger = (store) => {
+  return (next) => {
+    return (action) => {
+      console.log('[Middleware] dispatching', action);
+      setTimeout(() => {
+        next(action);
+      }, 3000);
+      console.log('[Middleware] next state', store.getState());
+      // return result;
+    };
+  };
+};
+
+// Connects devtools extension to javascript code in browser
+const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 const store = createStore(
   combineReducers({
     counterReducer: counterReducer,
     resultReducer: resultReducer,
-  })
+  }),
+  composeEnhancers(applyMiddleware(logger))
 );
 
 ReactDOM.render(
